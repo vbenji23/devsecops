@@ -1,0 +1,72 @@
+Mise en place du dépôt
+Crée un repo GitHub/GitLab pour ton projet.
+
+Ajoute ton README.md (celui qu’on vient de rédiger).
+
+Initialise la structure des dossiers (scripts/, data/, etc.).
+
+2️⃣ Module 1 – Gestion des Produits
+Implémente le CRUD complet en CSV (products.csv).
+
+Ajoute des tests unitaires pour vérifier les cas limites (prix négatif, quantité nulle).
+
+Documente les fonctions dans README.md.
+
+3️⃣ Module 2 – Authentification Sécurisée
+Implémente SHA-256 + salt unique par utilisateur.
+
+Ajoute la comparaison temporelle constante (hmac.compare_digest).
+
+Crée un compte admin par défaut (admin/admin123).
+
+Log toutes les tentatives (succès/échec) dans security_logs.csv.
+
+4️⃣ Module 3 – Vérification Mots de Passe
+Intègre la vérification locale (compromised_passwords.txt).
+
+Ajoute une fonction de force du mot de passe (longueur, majuscules, chiffres, caractères spéciaux).
+
+Implémente la génération de mot de passe sécurisé.
+
+5️⃣ Module 4 – Interface Graphique
+Utilise pywebview pour relier index.html à main.py.
+
+Crée des onglets : Produits, Authentification, Commandes, Sécurité.
+
+Ajoute des alertes visuelles (succès/erreur).
+
+6️⃣ Module 5 – Commandes & Statistiques
+Implémente CRUD commandes (orders.csv).
+
+Vérifie le stock avant validation.
+
+Ajoute statistiques : CA total, top produits.
+
+Bonus : visualisations avec Matplotlib/Seaborn.
+
+7️⃣ Module 6 – API REST
+Implémente endpoints Flask/FastAPI :
+
+/api/products
+
+/api/orders
+
+/api/auth/login
+
+/api/stats
+
+Ajoute authentification JWT.
+
+Documente avec Swagger/OpenAPI.
+
+8️⃣ Module 7 – Sécurité & Audit
+Intègre Bandit pour analyse sécurité.
+
+Ajoute Pylint pour qualité du code.
+
+Utilise Safety pour vérifier dépendances.
+
+Mets en place un pipeline CI/CD (GitHub Actions).
+
+📌 Prochain livrable
+👉 La prochaine étape concrète serait de coder le module 1 (CRUD Produits) avec tests unitaires et documentation. Ensuite, on pourra brancher le module 2 (Auth) pour sécuriser l’accès.
