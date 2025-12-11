@@ -1,0 +1,17 @@
+Objectif
+Créer un système CRUD (Create, Read, Update, Delete) pour gérer les produits dans un fichier products.csv.
+
+📂 Structure des données
+Chaque produit doit contenir :
+
+id (auto-incrémenté)
+
+nom
+
+description
+
+prix
+
+quantite
+
+categorie
