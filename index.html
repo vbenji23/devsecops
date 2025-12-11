@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>DevSecOps – Gestion Produits</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    h1 { color: #2c3e50; }
+    input, button { margin: 5px; padding: 6px; }
+    pre { background: #f4f4f4; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Gestion de Produits Sécurisée</h1>
+
+  <h2>Ajouter un produit</h2>
+  <input id="nom" placeholder="Nom">
+  <input id="desc" placeholder="Description">
+  <input id="prix" placeholder="Prix">
+  <input id="qte" placeholder="Quantité">
+  <input id="cat" placeholder="Catégorie">
+  <button onclick="addProduct()">Ajouter</button>
+  <p id="status"></p>
+
+  <h2>Liste des produits</h2>
+  <button onclick="getProducts()">Actualiser</button>
+  <pre id="products"></pre>
+
+  <script>
+    async function getProducts() {
+      const res = await window.pywebview.api.get_products();
+      document.getElementById("products").innerText = JSON.stringify(res, null, 2);
+    }
+    async function addProduct() {
+      const res = await window.pywebview.api.add_product(
+        document.getElementById("nom").value,
+        document.getElementById("desc").value,
+        document.getElementById("prix").value,
+        document.getElementById("qte").value,
+        document.getElementById("cat").value
+      );
+      document.getElementById("status").innerText = res.ok ? "Produit ajouté !" : "Erreur";
+      getProducts();
+    }
+  </script>
+</body>
+</html>
