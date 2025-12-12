@@ -2,16 +2,16 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>DevSecOps – Gestion Produits</title>
-  <style>
-    body { font-family: Arial; margin: 20px; }
-    h1 { color: #2c3e50; }
-    input, button { margin: 5px; padding: 6px; }
-    pre { background: #f4f4f4; padding: 10px; }
-  </style>
+  <title>DevSecOps – Produits</title>
 </head>
 <body>
-  <h1>Gestion de Produits Sécurisée</h1>
+  <h1>Gestion de Produits</h1>
+
+  <h2>Connexion</h2>
+  <input id="user" placeholder="Utilisateur">
+  <input id="pwd" type="password" placeholder="Mot de passe">
+  <button onclick="login()">Se connecter</button>
+  <p id="login_status"></p>
 
   <h2>Ajouter un produit</h2>
   <input id="nom" placeholder="Nom">
@@ -27,10 +27,19 @@
   <pre id="products"></pre>
 
   <script>
+    async function login() {
+      const res = await window.pywebview.api.login(
+        document.getElementById("user").value,
+        document.getElementById("pwd").value
+      );
+      document.getElementById("login_status").innerText = res.ok ? "Connecté !" : "Échec de connexion";
+    }
+
     async function getProducts() {
       const res = await window.pywebview.api.get_products();
       document.getElementById("products").innerText = JSON.stringify(res, null, 2);
     }
+
     async function addProduct() {
       const res = await window.pywebview.api.add_product(
         document.getElementById("nom").value,
