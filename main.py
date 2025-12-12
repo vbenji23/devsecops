@@ -15,8 +15,7 @@ def init_files():
         with open(USERS_FILE, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(["username","salt","hash"])
-        # compte admin par défaut
-        register_user("admin","admin123")
+        register_user("admin","admin123")  # compte par défaut
 
 def hash_password(password, salt):
     return hashlib.sha256(salt + password.encode()).digest()
@@ -40,6 +39,7 @@ def login(username, password):
     return False
 
 class Api:
+    # Produits
     def get_products(self):
         with open(PRODUCTS_FILE, "r", newline="", encoding="utf-8") as f:
             return list(csv.DictReader(f))
@@ -59,6 +59,14 @@ class Api:
             writer = csv.DictWriter(f, fieldnames=["id","nom","description","prix","quantite","categorie"])
             writer.writeheader()
             writer.writerows(new_list)
+        return {"ok": True}
+
+    # Authentification
+    def login(self, username, password):
+        return {"ok": login(username, password)}
+
+    def register(self, username, password):
+        register_user(username, password)
         return {"ok": True}
 
 def start():
