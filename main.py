@@ -1,7 +1,7 @@
 import os, csv, hashlib, hmac, secrets
 import webview
 
-DATA_DIR = "data"
+DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 PRODUCTS_FILE = os.path.join(DATA_DIR, "products.csv")
 USERS_FILE = os.path.join(DATA_DIR, "users.csv")
 
@@ -15,7 +15,7 @@ def init_files():
         with open(USERS_FILE, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(["username","salt","hash"])
-        register_user("admin","admin123")  # compte par défaut
+        register_user("admin","admin123")
 
 def hash_password(password, salt):
     return hashlib.sha256(salt + password.encode()).digest()
@@ -39,7 +39,6 @@ def login(username, password):
     return False
 
 class Api:
-    # Produits
     def get_products(self):
         with open(PRODUCTS_FILE, "r", newline="", encoding="utf-8") as f:
             return list(csv.DictReader(f))
@@ -52,16 +51,6 @@ class Api:
             writer.writerow([new_id, nom, description, prix, quantite, categorie])
         return {"ok": True, "id": new_id}
 
-    def delete_product(self, id):
-        produits = self.get_products()
-        new_list = [p for p in produits if p["id"] != id]
-        with open(PRODUCTS_FILE, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["id","nom","description","prix","quantite","categorie"])
-            writer.writeheader()
-            writer.writerows(new_list)
-        return {"ok": True}
-
-    # Authentification
     def login(self, username, password):
         return {"ok": login(username, password)}
 
@@ -72,7 +61,7 @@ class Api:
 def start():
     init_files()
     api = Api()
-    window = webview.create_window("DevSecOps – Gestion Produits", "index.html", js_api=api)
+    window = webview.create_window("DevSecOps – Accueil", os.path.join(os.path.dirname(__file__), "index.html"), js_api=api)
     webview.start()
 
 if __name__ == "__main__":
