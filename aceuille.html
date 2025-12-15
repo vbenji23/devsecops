@@ -1,143 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Accueil – Multi-tech (Python, CSS, C++, HTML, JS)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>Accueil – DevSecOps</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="header">
-    <div class="brand">
-      <span class="logo">⚙️</span>
-      <h1>DevSecOps – Accueil Multi-tech</h1>
-    </div>
-    <nav class="nav">
-      <a href="#python">Python</a>
-      <a href="#css">CSS</a>
-      <a href="#cpp">C++</a>
-      <a href="#html">HTML</a>
-      <a href="#javascript">JavaScript</a>
+    <h1>Bienvenue sur DevSecOps</h1>
+    <nav>
+      <a href="#produits">Produits</a>
+      <a href="#auth">Authentification</a>
+      <a href="#commandes">Commandes</a>
+      <a href="#stats">Statistiques</a>
+      <a href="#audit">Audit</a>
     </nav>
   </header>
 
   <main class="container">
-    <section class="hero">
-      <h2>Bienvenue</h2>
-      <p>Page d’accueil pour explorer et démontrer tes modules en Python, CSS, C++, HTML et JavaScript. Structure prête pour GitHub Pages ou intégration pywebview.</p>
-      <div class="actions">
-        <button class="btn primary" onclick="scrollToId('python')">Découvrir Python</button>
-        <button class="btn" onclick="scrollToId('javascript')">Voir JavaScript</button>
-      </div>
+    <section id="intro" class="card">
+      <h2>Présentation</h2>
+      <p>Application de gestion sécurisée pour commerçants. Modules : Produits, Authentification, Commandes, Statistiques, Audit.</p>
     </section>
 
-    <section class="grid">
-      <!-- Python -->
-      <article id="python" class="card">
-        <h3>Python</h3>
-        <p>Scripts backend, sécurité (SHA-256 + salt), CRUD CSV, intégration pywebview.</p>
-        <pre><code class="code">
-# Exemple: hachage SHA-256 + salt
-import hashlib, secrets
-salt = secrets.token_bytes(16)
-pwd = "admin123"
-digest = hashlib.sha256(salt + pwd.encode()).hexdigest()
-print(digest)
-        </code></pre>
-        <div class="card-actions">
-          <a class="btn" href="python.html">Voir plus</a>
-          <button class="btn" onclick="copyBlock(this)">Copier le code</button>
-        </div>
-      </article>
-
-      <!-- CSS -->
-      <article id="css" class="card">
-        <h3>CSS</h3>
-        <p>Styles responsives, thèmes, composants réutilisables.</p>
-        <pre><code class="code">
-/* Exemple: bouton primaire */
-.btn.primary {
-  background: #2d7ff9; color: #fff;
-  border: none; border-radius: 8px;
-  padding: 10px 14px; cursor: pointer;
-}
-.btn.primary:hover { background: #1e66d1; }
-        </code></pre>
-        <div class="card-actions">
-          <a class="btn" href="styles.css">Voir le fichier CSS</a>
-          <button class="btn" onclick="copyBlock(this)">Copier le code</button>
-        </div>
-      </article>
-
-      <!-- C++ -->
-      <article id="cpp" class="card">
-        <h3>C++</h3>
-        <p>Algorithmes, utilitaires CLI, libs natives. Intégration via API ou fichiers.</p>
-        <pre><code class="code">
-// Exemple: somme de tableau
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-int main() {
-  std::vector<int> v{1,2,3,4};
-  int s = 0; for(int x: v) s += x;
-  std::cout &lt;&lt; "Somme = " &lt;&lt; s &lt;&lt; std::endl;
-  return 0;
-}
-        </code></pre>
-        <div class="card-actions">
-          <a class="btn" href="cpp.html">Voir plus</a>
-          <button class="btn" onclick="copyBlock(this)">Copier le code</button>
-        </div>
-      </article>
-
-      <!-- HTML -->
-      <article id="html" class="card">
-        <h3>HTML</h3>
-        <p>Pages, composants, accessibilité, structure sémantique.</p>
-        <pre><code class="code">
-&lt;section class="product"&gt;
-  &lt;h2&gt;Clavier Mécanique RGB&lt;/h2&gt;
-  &lt;p&gt;79,99 € – Switches bleus, rétroéclairage.&lt;/p&gt;
-  &lt;button class="btn primary"&gt;Acheter&lt;/button&gt;
-&lt;/section&gt;
-        </code></pre>
-        <div class="card-actions">
-          <a class="btn" href="produits.html">Page produits</a>
-          <button class="btn" onclick="copyBlock(this)">Copier le code</button>
-        </div>
-      </article>
-
-      <!-- JavaScript -->
-      <article id="javascript" class="card">
-        <h3>JavaScript</h3>
-        <p>Interactions UI, appels API (pywebview), logique front.</p>
-        <pre><code class="code">
-// Exemple: appel vers backend pywebview
-async function getProducts() {
-  const res = await window.pywebview?.api?.get_products();
-  console.log(res);
-}
-document.addEventListener('DOMContentLoaded', getProducts);
-        </code></pre>
-        <div class="card-actions">
-          <a class="btn" href="app.js">Voir app.js</a>
-          <button class="btn" onclick="copyBlock(this)">Copier le code</button>
-        </div>
-      </article>
+    <section id="produits" class="card">
+      <h2>Produits</h2>
+      <button onclick="getProducts()">Afficher les produits</button>
+      <pre id="products"></pre>
     </section>
 
-    <section class="cta">
-      <h3>Prêt à intégrer ?</h3>
-      <p>Relie cette page à ton backend Python via pywebview (window.pywebview.api) ou publie-la via GitHub Pages pour une démo statique.</p>
-      <div class="actions">
-        <a class="btn primary" href="index.html">Rafraîchir</a>
-        <button class="btn" onclick="scrollToId('python')">Commencer par Python</button>
-      </div>
+    <section id="auth" class="card">
+      <h2>Authentification</h2>
+      <input id="user" placeholder="Utilisateur">
+      <input id="pwd" type="password" placeholder="Mot de passe">
+      <button onclick="login()">Connexion</button>
+      <p id="login_status"></p>
+    </section>
+
+    <section id="commandes" class="card">
+      <h2>Commandes</h2>
+      <input id="pid" placeholder="ID produit">
+      <input id="qte" placeholder="Quantité">
+      <input id="client" placeholder="Client">
+      <button onclick="addOrder()">Ajouter commande</button>
+      <pre id="orders"></pre>
+    </section>
+
+    <section id="stats" class="card">
+      <h2>Statistiques</h2>
+      <button onclick="getStats()">Afficher stats</button>
+      <pre id="stats_box"></pre>
+    </section>
+
+    <section id="audit" class="card">
+      <h2>Audit</h2>
+      <button onclick="runAudit()">Lancer audit</button>
+      <pre id="audit_box"></pre>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© 2025 – DevSecOps Multi-tech. Sécurité intégrée dès la conception.</p>
+    <p>© 2025 – Projet DevSecOps</p>
   </footer>
 
   <script src="app.js"></script>
